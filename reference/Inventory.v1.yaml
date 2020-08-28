@@ -22,8 +22,9 @@ paths:
         required: true
         description: The catalog item to modify
     get:
-      summary: Get the current amount of the item avalible
-      tags: []
+      summary: Get the current amount of the item available
+      tags:
+        - inventory
       responses:
         '200':
           description: OK
@@ -64,6 +65,65 @@ paths:
           description: Internal Server Error
       operationId: get-inventory-catalogItemId
       description: Gets the amount of items avalible in inventory of the requested catalogItem
+    patch:
+      summary: Update the amount of a item
+      operationId: patch-inventory-catalogItemId
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  newAmount:
+                    type: integer
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amountChange:
+                  type: integer
+            examples:
+              example-1:
+                value:
+                  amountIncrease: 35
+        description: ''
+      description: Updates the amount of a item
+      tags:
+        - inventory
   /brand:
     post:
       summary: Create a new Brand
@@ -107,17 +167,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: the name of this brand
-                description:
-                  type: string
-                  description: the description to discribe this brand
-                iconUrl:
-                  type: string
-                  description: a optional url pointing to a icon url
+              $ref: '#/components/schemas/BrandForm'
             examples:
               example-1:
                 value:
@@ -266,21 +316,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: the name of this brand
-                description:
-                  type: string
-                  description: the description to discribe this brand
-                iconUrl:
-                  type: string
-                  description: a optional url pointing to a icon url
-              required:
-                - name
-                - description
-                - iconUrl
+              $ref: '#/components/schemas/BrandForm'
         description: The brand object to replace this with
   /catalog:
     post:
@@ -320,56 +356,13 @@ paths:
               schema:
                 $ref: ../Error.v1.yaml
       description: Create a new catalog item
+      tags:
+        - catalog
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: the name of this item
-                description:
-                  type: string
-                  description: the description of this item
-                iconUrl:
-                  type: string
-                  description: A optional url pointing to a jpg or png image
-                  format: uri
-                imagesUrls:
-                  type: array
-                  description: A optional list of image urls to display
-                  items:
-                    type: string
-                    format: uri
-                _links:
-                  type: object
-                  description: A object containing links to other objects         refrenced in        this item
-                  properties:
-                    brand:
-                      type: string
-                      description: a url to the brand who makes this product
-                      format: uri
-                    seller:
-                      type: string
-                      description: a url to the seller who sales this item
-                      format: uri
-                  required:
-                    - brand
-                    - seller
-                sellerId:
-                  type: string
-                  description: A random string used to identify the seller
-                brandId:
-                  type: string
-                  description: A random string used to identify the brand
-              required:
-                - name
-                - description
-                - sellerId
-                - brandId
-      tags:
-        - Catalog
+              $ref: '#/components/schemas/CatalogItemForm'
   '/catalog/{id}':
     parameters:
       - schema:
@@ -381,7 +374,7 @@ paths:
     get:
       summary: Get catalog by ID
       tags:
-        - Catalog
+        - catalog
       responses:
         '200':
           description: OK
@@ -462,53 +455,14 @@ paths:
         content:
           application/json:
             schema:
+              $ref: '#/components/schemas/CatalogItemForm'
+          application/xml:
+            schema:
               type: object
-              properties:
-                name:
-                  type: string
-                  description: the name of this item
-                description:
-                  type: string
-                  description: the description of this item
-                iconUrl:
-                  type: string
-                  description: A optional url pointing to a jpg or png image
-                  format: uri
-                imagesUrls:
-                  type: array
-                  description: A optional list of image urls to display
-                  items:
-                    type: string
-                    format: uri
-                _links:
-                  type: object
-                  description: A object containing links to other objects refrenced in        this item
-                  required:
-                    - brand
-                    - seller
-                  properties:
-                    brand:
-                      type: string
-                      description: a url to the brand who makes this product
-                      format: uri
-                    seller:
-                      type: string
-                      description: a url to the seller who sales this item
-                      format: uri
-                sellerId:
-                  type: string
-                  description: A random string used to identify the seller
-                brandId:
-                  type: string
-                  description: A random string used to identify the brand
-              required:
-                - name
-                - description
-                - _links
-                - sellerId
-                - brandId
+              properties: {}
+        description: ''
       tags:
-        - Catalog
+        - catalog
     delete:
       summary: Delete catalog by ID
       operationId: delete-catalog-id
@@ -547,7 +501,7 @@ paths:
                 $ref: ../Error.v1.yaml
       description: Delete catalog by ID
       tags:
-        - Catalog
+        - catalog
 components:
   schemas:
     CatalogItem:
@@ -555,11 +509,61 @@ components:
       type: object
       description: A item contained within the catalog
       x-tags:
-        - Catalog
+        - catalog
       properties:
         id:
           type: string
           description: A random identifier used to identify this object
+        name:
+          type: string
+          description: the name of this item
+        description:
+          type: string
+          description: the description of this item
+        iconUrl:
+          type: string
+          description: A optional url pointing to a jpg or png image
+          format: uri
+        imagesUrls:
+          type: array
+          description: A optional list of image urls to display
+          items:
+            type: string
+            format: uri
+        _links:
+          type: object
+          description: A object containing links to other objects refrenced in this item
+          required:
+            - brand
+            - seller
+          properties:
+            brand:
+              type: string
+              description: a url to the brand who makes this product
+              format: uri
+            seller:
+              type: string
+              description: a url to the seller who sales this item
+              format: uri
+        sellerId:
+          type: string
+          description: A random string used to identify the seller
+        brandId:
+          type: string
+          description: A random string used to identify the brand
+      required:
+        - name
+        - description
+        - _links
+        - sellerId
+        - brandId
+    CatalogItemForm:
+      title: CatalogItemForm
+      type: object
+      description: A item contained within the catalog
+      x-tags:
+        - catalog
+      properties:
         name:
           type: string
           description: the name of this item
@@ -625,6 +629,25 @@ components:
         - description
       x-tags:
         - brand
+    BrandForm:
+      title: BrandForm
+      type: object
+      description: 'A brand is used to display who produces a item, one brand can be used by many sellers'
+      x-tags:
+        - brand
+      properties:
+        name:
+          type: string
+          description: the name of this brand
+        description:
+          type: string
+          description: the description to discribe this brand
+        iconUrl:
+          type: string
+          description: a optional url pointing to a icon url
+      required:
+        - name
+        - description
   securitySchemes:
     JWT auth:
       type: http
@@ -635,5 +658,7 @@ security:
 tags:
   - name: brand
     description: Used to access or change brands
-  - name: Catalog
+  - name: catalog
     description: Used to access or change catalog items
+  - name: inventory
+    description: Used to access or change inventory
