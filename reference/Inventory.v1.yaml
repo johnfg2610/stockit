@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   contact:
     name: john
-    url: github.com/johnfg2610/stockit
+    url: https://www.github.com/johnfg2610/stockit
     email: johnfg2610@gmail.com
   license:
     name: ISC
@@ -649,12 +649,12 @@ components:
         - name
         - description
   securitySchemes:
-    JWT auth:
+    jwt-auth:
       type: http
       scheme: bearer
       bearerFormat: JWT
 security:
-  - JWT auth: []
+  - jwt-auth: []
 tags:
   - name: brand
     description: Used to access or change brands
