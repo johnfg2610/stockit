@@ -18,11 +18,13 @@
         "functionOptions": {
           "match": "Stoplight"
         }
-      }
+      },
+      "severity": "off"
     },
     "info-license": "warn",
     "license-url": "warn",
     "contact-properties": "warn",
-    "oas2-parameter-description": "warn"
+    "oas2-parameter-description": "warn",
+    "tag-description": "warn"
   }
 }

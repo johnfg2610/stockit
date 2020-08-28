@@ -1,0 +1,10 @@
+title: Error
+type: object
+description: Used to describe a error that happened during the execution of a service
+properties:
+  code:
+    type: number
+  message:
+    type: string
+  requestId:
+    type: string
