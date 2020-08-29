@@ -31,9 +31,7 @@ paths:
           content:
             application/json:
               schema:
-                type: integer
-                default: 0
-                description: The amount of the selected product avalible
+                $ref: '#/components/schemas/AmountAvalible'
               examples:
                 example-1:
                   value: 32
@@ -74,10 +72,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  newAmount:
-                    type: integer
+                $ref: '#/components/schemas/AmountAvalible'
         '400':
           description: Bad Request
           content:
@@ -112,10 +107,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                amountChange:
-                  type: integer
+              $ref: '#/components/schemas/AmountChange'
             examples:
               example-1:
                 value:
@@ -648,6 +640,18 @@ components:
       required:
         - name
         - description
+    AmountAvalible:
+      title: AmountAvalible
+      type: object
+      properties:
+        amount:
+          type: integer
+    AmountChange:
+      title: AmountChange
+      type: object
+      properties:
+        amountChangeable:
+          type: integer
   securitySchemes:
     JWT auth:
       type: http
