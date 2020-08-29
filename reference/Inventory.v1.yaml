@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   contact:
     name: john
-    url: https://www.github.com/johnfg2610/stockit
+    url: 'https://www.github.com/johnfg2610/stockit'
     email: johnfg2610@gmail.com
   license:
     name: ISC
@@ -31,7 +31,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AmountAvalible'
+                $ref: '#/components/schemas/AmountAvailable'
               examples:
                 example-1:
                   value: 32
@@ -640,8 +640,8 @@ components:
       required:
         - name
         - description
-    AmountAvalible:
-      title: AmountAvalible
+    AmountAvailable:
+      title: AmountAvailable
       type: object
       properties:
         amount:
