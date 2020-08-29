@@ -1,0 +1,1 @@
+npx @openapitools/openapi-generator-cli generate --skip-validate-spec -i ./reference/Inventory.v1.yaml -g aspnetcore -o ./out --additional-properties=aspnetCoreVersion=3.1,enumNameSuffix=E,operationIsAsync=true,operationResultTask=true,packageName=Johnfg2610.Stockit,packageTitle=Stockit,useNewtonsoft=false
