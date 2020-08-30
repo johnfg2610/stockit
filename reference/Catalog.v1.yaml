@@ -1,0 +1,318 @@
+openapi: '3.0.0'
+info:
+  title: Catalog
+  version: '1.0.0'
+  contact:
+    name: john
+    url: 'https://www.github.com/johnfg2610/stockit'
+    email: johnfg2610@gmail.com
+  license:
+    name: ISC
+    url: 'https://github.com/johnfg2610/stockit/blob/master/LICENSE'
+  description: Used to access inventory counts as well as brands and catalog items
+servers:
+- url: http://localhost:3000
+paths: 
+  /catalog:
+    post:
+      summary: Create a new catalog
+      operationId: post-catalog
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+      description: Create a new catalog item
+      tags:
+        - catalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogItemForm'
+  '/catalog/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: The identifier to refrence the catalog item
+    get:
+      summary: Get catalog by ID
+      tags:
+        - catalog
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogItem'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+      operationId: get-catalog-id
+      description: Gets a catalog item by ID
+    put:
+      summary: Replace catalog by ID
+      operationId: put-catalog-id
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+      description: Replaces the catalog item
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogItemForm'
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+        description: ''
+      tags:
+        - catalog
+    delete:
+      summary: Delete catalog by ID
+      operationId: delete-catalog-id
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+      description: Delete catalog by ID
+      tags:
+        - catalog
+components:
+  schemas: 
+    CatalogItem:
+      title: CatalogItem
+      type: object
+      description: A item contained within the catalog
+      x-tags:
+        - catalog
+      properties:
+        id:
+          type: string
+          description: A random identifier used to identify this object
+        name:
+          type: string
+          description: the name of this item
+        description:
+          type: string
+          description: the description of this item
+        iconUrl:
+          type: string
+          description: A optional url pointing to a jpg or png image
+          format: uri
+        imagesUrls:
+          type: array
+          description: A optional list of image urls to display
+          items:
+            type: string
+            format: uri
+        _links:
+          type: object
+          description: A object containing links to other objects refrenced in this item
+          required:
+            - brand
+            - seller
+          properties:
+            brand:
+              type: string
+              description: a url to the brand who makes this product
+              format: uri
+            seller:
+              type: string
+              description: a url to the seller who sales this item
+              format: uri
+        sellerId:
+          type: string
+          description: A random string used to identify the seller
+        brandId:
+          type: string
+          description: A random string used to identify the brand
+      required:
+        - name
+        - description
+        - _links
+        - sellerId
+        - brandId
+    CatalogItemForm:
+      title: CatalogItemForm
+      type: object
+      description: A item contained within the catalog
+      x-tags:
+        - catalog
+      properties:
+        name:
+          type: string
+          description: the name of this item
+        description:
+          type: string
+          description: the description of this item
+        iconUrl:
+          type: string
+          description: A optional url pointing to a jpg or png image
+          format: uri
+        imagesUrls:
+          type: array
+          description: A optional list of image urls to display
+          items:
+            type: string
+            format: uri
+        _links:
+          type: object
+          description: A object containing links to other objects refrenced in this item
+          required:
+            - brand
+            - seller
+          properties:
+            brand:
+              type: string
+              description: a url to the brand who makes this product
+              format: uri
+            seller:
+              type: string
+              description: a url to the seller who sales this item
+              format: uri
+        sellerId:
+          type: string
+          description: A random string used to identify the seller
+        brandId:
+          type: string
+          description: A random string used to identify the brand
+      required:
+        - name
+        - description
+        - _links
+        - sellerId
+        - brandId
+  securitySchemes:
+    jwt-auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - jwt-auth: []
+tags:
+  - name: brand
+    description: Used to access or change brands
+  - name: catalog
+    description: Used to access or change catalog items
+  - name: inventory
+    description: Used to access or change inventory

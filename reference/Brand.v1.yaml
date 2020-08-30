@@ -1,0 +1,266 @@
+openapi: '3.0.0'
+info:
+  title: Brand
+  version: '1.0'
+  contact:
+    name: john
+    url: 'https://www.github.com/johnfg2610/stockit'
+    email: johnfg2610@gmail.com
+  license:
+    name: ISC
+    url: 'https://github.com/johnfg2610/stockit/blob/master/LICENSE'
+  description: Used to access inventory counts as well as brands and catalog items
+servers:
+- url: http://localhost:3000
+paths: 
+  /brand:
+    post:
+      summary: Create a new Brand
+      operationId: post-brand
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+      tags:
+        - brand
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrandForm'
+            examples:
+              example-1:
+                value:
+                  name: string
+                  description: string
+                  iconUrl: string
+        description: ''
+      description: Used to create a new brand
+  '/brand/{brandId}':
+    parameters:
+      - schema:
+          type: string
+        name: brandId
+        in: path
+        required: true
+        description: the id of the brand to access
+    get:
+      summary: Get brand by ID
+      tags:
+        - brand
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Brand'
+              examples:
+                example-1:
+                  value:
+                    id: string
+                    name: string
+                    description: string
+                    iconUrl: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+      operationId: get-brand-brandId
+      description: Get a brand by ID
+    delete:
+      summary: Delete a brand by ID
+      operationId: delete-brand-brandId
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+      description: Delete a brand by ID
+      tags:
+        - brand
+    put:
+      summary: Replace a brand by ID
+      operationId: put-brand-brandId
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../Error.v1.yaml
+      description: Replaces a brand by ID
+      tags:
+        - brand
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrandForm'
+        description: The brand object to replace this with
+components:
+  schemas:
+    Brand:
+      title: Brand
+      type: object
+      description: 'A brand is used to display who produces a item, one brand can be used by many sellers'
+      properties:
+        id:
+          type: string
+          description: a random identifier to identify this brand
+        name:
+          type: string
+          description: the name of this brand
+        description:
+          type: string
+          description: the description to discribe this brand
+        iconUrl:
+          type: string
+          description: a optional url pointing to a icon url
+      required:
+        - name
+        - description
+      x-tags:
+        - brand
+    BrandForm:
+      title: BrandForm
+      type: object
+      description: 'A brand is used to display who produces a item, one brand can be used by many sellers'
+      x-tags:
+        - brand
+      properties:
+        name:
+          type: string
+          description: the name of this brand
+        description:
+          type: string
+          description: the description to discribe this brand
+        iconUrl:
+          type: string
+          description: a optional url pointing to a icon url
+      required:
+        - name
+        - description
+  securitySchemes:
+    jwt-auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - jwt-auth: []
+tags:
+  - name: brand
+    description: Used to access or change brands
+  - name: catalog
+    description: Used to access or change catalog items
+  - name: inventory
+    description: Used to access or change inventory
