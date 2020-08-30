@@ -1,7 +1,7 @@
-openapi: '3.0.0'
+openapi: 3.0.0
 info:
   title: Catalog
-  version: '1.0.0'
+  version: 1.0.0
   contact:
     name: john
     url: 'https://www.github.com/johnfg2610/stockit'
@@ -11,8 +11,8 @@ info:
     url: 'https://github.com/johnfg2610/stockit/blob/master/LICENSE'
   description: Used to access inventory counts as well as brands and catalog items
 servers:
-- url: http://localhost:3000
-paths: 
+  - url: 'http://localhost:3000'
+paths:
   /catalog:
     post:
       summary: Create a new catalog
@@ -25,31 +25,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
       description: Create a new catalog item
       tags:
         - catalog
@@ -82,31 +82,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
       operationId: get-catalog-id
       description: Gets a catalog item by ID
     put:
@@ -120,31 +120,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
       description: Replaces the catalog item
       requestBody:
         content:
@@ -169,36 +169,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
       description: Delete catalog by ID
       tags:
         - catalog
 components:
-  schemas: 
+  schemas:
     CatalogItem:
       title: CatalogItem
       type: object

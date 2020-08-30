@@ -41,27 +41,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ./Error.v1.yaml
       operationId: get-inventory-catalogItemId
       description: Gets the amount of items avalible in inventory of the requested catalogItem
     patch:
@@ -80,31 +84,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
       requestBody:
         content:
           application/json:

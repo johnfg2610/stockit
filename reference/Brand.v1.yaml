@@ -25,31 +25,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
       tags:
         - brand
       requestBody:
@@ -96,31 +96,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
       operationId: get-brand-brandId
       description: Get a brand by ID
     delete:
@@ -134,31 +134,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
       description: Delete a brand by ID
       tags:
         - brand
@@ -173,31 +173,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: ../Error.v1.yaml
+                $ref: ./Error.v1.yaml
       description: Replaces a brand by ID
       tags:
         - brand
